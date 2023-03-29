@@ -1,13 +1,12 @@
 import { Fragment, HTMLAttributes, ReactNode } from 'react';
 import classNames from 'classnames';
 
-import errors from '../data/errors.json';
 import { mount } from '../utilities/show';
 import Button from './Button';
 import styles from '../assets/stylesheets/error-view.module.scss';
 
 export interface ErrorViewProps extends HTMLAttributes<HTMLDivElement> {
-  code?: keyof typeof errors;
+  code?: number;
   message: ReactNode;
 }
 
@@ -24,7 +23,6 @@ function ErrorView(props: ErrorViewProps) {
           <Fragment>
             <h1>{code}</h1>
             <span>{message}</span>
-            <p>{errors[code!]}</p>
           </Fragment>
         )}
 
