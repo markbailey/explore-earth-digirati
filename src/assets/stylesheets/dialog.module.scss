@@ -1,0 +1,46 @@
+@use 'variables' as *;
+
+dialog.dialog {
+  padding: var(--spacing-0);
+  border: var(--border-0);
+  // transform: scale(0);
+  // transition: transform 0.3s ease-in-out;
+  // transition-delay: 0.3s;
+
+  &::backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgb(0 0 0 / 0.9);
+    // opacity: 0;
+    // transition: opacity 0.3s ease-in-out;
+  }
+
+  // &[open] {
+  //   transform: scale(1);
+  //   &::backdrop {
+  //     opacity: 1;
+  //   }
+  // }
+
+  @media (max-width: #{$xs-max}) {
+    width: 100%;
+    height: 100vh;
+    max-width: 100%;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+}
+
+dialog.country {
+  max-width: 20rem;
+
+  select {
+    flex: 0;
+  }
+
+  @media (max-width: #{$xs-max}) {
+    article {
+      height: 100vh;
+    }
+  }
+}

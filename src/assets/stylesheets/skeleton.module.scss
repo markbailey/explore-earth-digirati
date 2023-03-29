@@ -1,0 +1,81 @@
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+:root {
+  --skeleton-color: rgb(0 0 0 / 25%);
+}
+
+.card {
+  position: relative;
+  isolation: isolate;
+  min-height: var(--sm-min);
+  height: 100%;
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.25) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  animation: shimmer 1s ease-in-out infinite alternate;
+}
+
+.image,
+.button,
+.title,
+.subtitle,
+.text {
+  background-color: var(--skeleton-color);
+}
+
+.image {
+  z-index: 0;
+  max-width: 125%;
+  min-width: 100%;
+  height: auto;
+  padding: 33%;
+}
+
+.button {
+  width: 100%;
+  padding: var(--spacing-4) var(--spacing-6);
+  min-height: var(--spacing-14);
+}
+
+.title {
+  width: 60%;
+  padding: var(--spacing-6);
+  margin-bottom: var(--spacing-4);
+}
+
+.subtitle {
+  width: 35%;
+  padding: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+}
+
+.text {
+  width: 100%;
+  padding: var(--spacing-4);
+  margin-bottom: var(--spacing-4);
+}
+
+.text:last-of-type {
+  width: 75%;
+  margin-bottom: 0;
+}

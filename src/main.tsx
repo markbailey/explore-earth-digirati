@@ -1,11 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+import { Provider } from './context/app';
+import ErrorBoundary from './components/ErrorBoundary';
+import ErrorView from './components/ErrorView';
+import App from './App';
+
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import './assets/stylesheets/global.scss';
+
+const element = document.getElementById('root') as HTMLElement;
+const root = createRoot(element);
+
 root.render(
-    <React.StrictMode>
+  <StrictMode>
+    <ErrorBoundary fallback={<ErrorView message="Oops! something seems to have gone wrong." />}>
+      <Provider>
         <App />
-    </React.StrictMode>
+      </Provider>
+    </ErrorBoundary>
+  </StrictMode>
 );
+
+serviceWorkerRegistration.register();

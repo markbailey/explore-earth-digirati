@@ -1,0 +1,43 @@
+@use 'variables' as *;
+
+:root {
+  --header-h: 4rem;
+}
+
+.header {
+  z-index: 999;
+  position: fixed;
+  inset: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-6);
+  min-height: var(--header-h);
+  background-color: var(--white);
+
+  @media (min-width: #{$md-min}) {
+    padding: 0 var(--spacing-6);
+  }
+}
+
+.brand {
+  padding: var(--spacing-6);
+  text-decoration: none;
+}
+
+.logo {
+  color: var(--primary);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-bold);
+  line-height: var(--fs-1);
+  text-transform: uppercase;
+  pointer-events: none;
+
+  > span {
+    font-weight: var(--fw-normal);
+  }
+
+  @media (min-width: #{$sm-min}) {
+    font-size: var(--fs-4);
+  }
+}

@@ -1,0 +1,37 @@
+:root {
+  --search: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M0 0h24v24H0V0z' fill='none'/%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
+  --chevron-down: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='currentColor'%3e%3cpath fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.formControl {
+  appearance: none;
+  flex: 1;
+  border: none;
+  width: 100%;
+  color: var(--primary);
+  padding: var(--spacing-4) var(--spacing-6);
+  font-family: inherit;
+  font-size: var(--fs-1);
+  line-height: 1.813rem;
+}
+
+.search,
+.select {
+  @extend .formControl;
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-6) center;
+  background-size: var(--spacing-6); // TODO - Look at swapping --spacing-6 for a custom variable
+}
+
+.search {
+  &:placeholder-shown:not(:disabled) {
+    background-image: var(--search);
+  }
+}
+
+.select {
+  &:not(:disabled) {
+    background-image: var(--chevron-down);
+    cursor: pointer;
+  }
+}

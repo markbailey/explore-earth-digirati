@@ -1,0 +1,40 @@
+@use 'variables' as *;
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding: var(--spacing-4);
+}
+
+.grid > * {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  flex: 0 1 100%;
+  padding: var(--spacing-4);
+
+  > * {
+    width: 100%;
+  }
+
+  @media (min-width: #{$sm-min}) {
+    flex: 0 1 50%;
+  }
+
+  @media (min-width: #{$md-min}) {
+    flex: 0 1 100%;
+  }
+
+  @media (min-width: 52.5rem) {
+    flex: 0 1 50%;
+  }
+
+  @media (min-width: #{$lg-min}) {
+    flex: 0 1 33.33%;
+  }
+
+  @media (min-width: #{$xxl-min}) {
+    flex: 0 1 25%;
+  }
+}

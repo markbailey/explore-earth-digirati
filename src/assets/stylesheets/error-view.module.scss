@@ -1,0 +1,26 @@
+.view {
+  display: grid;
+  place-content: center;
+  place-items: center;
+  width: 100%;
+  min-height: 100vh;
+
+  div {
+    text-align: center;
+    padding: var(--spacing-8);
+    max-width: var(--sm-min);
+  }
+
+  div h1 {
+    font-size: var(--fs-29);
+  }
+
+  div h2 {
+    font-size: var(--fs-13);
+  }
+
+  div p,
+  div button {
+    margin: var(--spacing-6) 0 0;
+  }
+}

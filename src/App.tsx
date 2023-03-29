@@ -1,61 +1,117 @@
-import { useState } from 'react';
-import classNames from 'classnames';
-import { ReactComponent as ReactLogo } from './assets/react.svg';
-import { ReactComponent as ViteLogo } from './assets/vite.svg';
-import { ReactComponent as TypescriptLogo } from './assets/typescript.svg';
-import { ReactComponent as ScssLogo } from './assets/scss.svg';
-import styles from './App.module.scss';
+import { Fragment, useContext, useEffect, useMemo } from 'react';
+
+import { AppContext } from './context/app';
+import regions from './data/regions.json';
+import { mount } from './utilities/show';
+import { titleCase } from './utilities/string';
+
+import { CountryCard, RegionCard } from './components/custom/cards';
+import { CountryDialog } from './components/custom/CountryDialog';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import ScrollToTop from './components/ScrollToTop';
+
+import gridStyles from './assets/stylesheets/grid.module.scss';
+import { SkeletonCard } from './components/Skeleton';
 
 function App() {
-    const [count, setCount] = useState(0);
+  const { region, country, countries, searchCriteria, isFetching, setCountry, setRegion } =
+    useContext(AppContext);
 
-    return (
-        <div className={styles.App}>
-            <div>
-                <a href="https://vitejs.dev" target="_blank">
-                    <ViteLogo
-                        height="6em"
-                        width="6em"
-                        className={classNames(styles.logo)}
-                        title="Vite logo"
-                    />
-                </a>
-                <a href="https://reactjs.org" target="_blank">
-                    <ReactLogo
-                        height="6em"
-                        width="6em"
-                        className={classNames(styles.logo, styles.react)}
-                        title="React logo"
-                    />
-                </a>
-                <a href="https://www.typescriptlang.org/" target="_blank">
-                    <TypescriptLogo
-                        height="6em"
-                        width="6em"
-                        className={classNames(styles.logo, styles.ts)}
-                        title="Typescript logo"
-                    />
-                </a>
-                <a href="https://sass-lang.com/" target="_blank">
-                    <ScssLogo
-                        height="6em"
-                        width="6em"
-                        className={classNames(styles.logo, styles.scss)}
-                        title="SCSS logo"
-                    />
-                </a>
-            </div>
-            <div className={styles.card}>
-                <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className={styles['read-the-docs']}>
-                Click on the Vite and React logos to learn more
-            </p>
+  const filteredRegions = useMemo(() => {
+    return regions.names.filter((region) => region.includes(searchCriteria)) as RegionKey[];
+  }, [searchCriteria]);
+
+  const filteredCountries = useMemo(() => {
+    return countries.filter((country) => country.name.common.includes(searchCriteria));
+  }, [countries, searchCriteria]);
+
+  const hasRegion = region !== null;
+  const hasResults = hasRegion ? filteredCountries.length > 0 : filteredRegions.length > 0;
+
+  const onRegionChange = (regionName: RegionKey) => {
+    setRegion(regionName);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const renderRegionCards = () =>
+    filteredRegions.map((name) => {
+      const description = regions.descriptions[name];
+      const photoId = regions.imageIds[name];
+
+      return (
+        <div key={name}>
+          <RegionCard
+            name={name}
+            description={description}
+            photoId={photoId}
+            onButtonClick={onRegionChange}
+          />
         </div>
-    );
+      );
+    });
+
+  const renderCountryCards = () =>
+    filteredCountries.map((country) => (
+      <div key={country.name.common}>
+        <CountryCard {...country} onButtonClick={setCountry} />
+      </div>
+    ));
+
+  const renderSkeletonCards = () =>
+    [...Array(6)].map((_, i) => (
+      <div key={`skeleton_${i}`}>
+        <SkeletonCard />
+      </div>
+    ));
+
+  useEffect(() => {
+    if (country !== null) document.body.classList.add('no-scroll');
+    else document.body.classList.remove('no-scroll');
+  }, [country]);
+
+  useEffect(() => {
+    let pageTitle = 'Explore Earth | Mark Bailey | Digirati';
+    if (region !== null) pageTitle = `${titleCase(region)} | ${pageTitle}`;
+    if (country !== null) pageTitle = `${country.name.common} (${country.cca2}) | ${pageTitle}`;
+    document.title = pageTitle;
+  }, [region, country]);
+
+  return (
+    <Fragment>
+      <CountryDialog country={country} open={country !== null} onClose={() => setCountry(null)} />
+      <Header />
+      <Hero />
+
+      <main>
+        {mount(
+          hasRegion,
+          <div style={{ padding: 'var(--spacing-6)' }}>
+            <h1>{titleCase(region ?? '')}</h1>
+            <p>{regions.descriptions[region!]}</p>
+          </div>
+        )}
+
+        {mount(
+          !isFetching && !hasResults,
+          <div style={{ padding: 'var(--spacing-6)' }}>
+            <p>No results found</p>
+          </div>
+        )}
+
+        {mount(
+          hasResults,
+          <div className={gridStyles.grid}>
+            {mount(!isFetching && !hasRegion, renderRegionCards())}
+            {mount(!isFetching && hasRegion, renderCountryCards())}
+            {mount(isFetching, renderSkeletonCards())}
+          </div>
+        )}
+      </main>
+
+      <ScrollToTop offset={0} />
+    </Fragment>
+  );
 }
 
 export default App;

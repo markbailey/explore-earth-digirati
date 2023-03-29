@@ -1,0 +1,19 @@
+{
+  "names": ["africa", "americas", "antarctic", "asia", "europe", "oceania"],
+  "descriptions": {
+    "africa": "Africa is the world's second-largest and second-most-populous continent, after Asia. At about 30.3 million km2 (11.7 million square miles) including adjacent islands, it covers 6% of Earth's total surface area and 20.4% of its land area. With 1.2 billion people as of 2016, it accounts for about 16% of the world's human population.",
+    "americas": "The Americas, also collectively called America, are the combined continental landmasses of North America, South America, and Central America. In addition, the Caribbean and Atlantic islands are included as part of the Americas.",
+    "antarctic": "The Antarctic is a polar region, specifically the region around the Earth's South Pole, opposite the Arctic region around the North Pole. The Antarctic comprises the continent of Antarctica and surrounding seas.",
+    "asia": "Asia is Earth's largest and most populous continent, located primarily in the eastern and northern hemispheres. It shares the continental landmass of Eurasia with the continent of Europe and the continental landmass of Afro-Eurasia with both Europe and Africa.",
+    "europe": "Europe is a continent located entirely in the Northern Hemisphere and mostly in the Eastern Hemisphere. It comprises the westernmost part of Eurasia and is bordered by the Arctic Ocean to the north, the Atlantic Ocean to the west, and the Mediterranean Sea to the south.",
+    "oceania": "Oceania, also known as Oceanica, is a region centred on the islands of the tropical Pacific Ocean. The term is sometimes used more specifically to denote a continent comprising Australia, New Zealand, New Guinea, the Solomon Islands, Vanuatu and neighbouring islands in the Pacific Ocean."
+  },
+  "imageIds": {
+    "africa": 59873,
+    "americas": 14213371,
+    "antarctic": 868990,
+    "asia": 1531660,
+    "europe": 414094,
+    "oceania": 10513227
+  }
+}
