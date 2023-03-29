@@ -3,7 +3,7 @@ import Dialog from '../../components/Dialog';
 
 export default createBoard({
   name: 'Modal',
-  Board: () => <Dialog open={true} />,
+  Board: () => <Dialog open={true} onClose={() => {}} />,
   environmentProps: {
     canvasWidth: 1920,
     canvasHeight: 640,

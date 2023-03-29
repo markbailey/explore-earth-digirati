@@ -19,9 +19,7 @@ export default createBoard({
             <span>United Kingdom of Great Britain and Northern Ireland</span>
           </CardBody>
 
-          <Button to="#" className={cardStyles.link} link>
-            View
-          </Button>
+          <Button className={cardStyles.link}>View</Button>
         </Card>
       </div>
     </BrowserRouter>

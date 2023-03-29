@@ -4,9 +4,7 @@ import Hero from '../../components/Hero';
 
 export default createBoard({
   name: 'Hero',
-  Board: () => (
-    <Hero searchCriteria="" countries={[]} onSearchChange={() => {}} onFilterChange={() => {}} />
-  ),
+  Board: () => <Hero />,
   environmentProps: {
     canvasWidth: 1920,
     windowWidth: 1024,

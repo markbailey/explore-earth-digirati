@@ -17,12 +17,7 @@ export default createBoard({
     <BrowserRouter>
       <div style={{ minHeight: '100vh', paddingTop: '4rem' }}>
         <Header />
-        <Hero
-          searchCriteria=""
-          countries={[]}
-          onSearchChange={() => {}}
-          onFilterChange={() => {}}
-        />
+        <Hero />
         <main>
           <div className={gridStyles.grid}>
             {regions.names.map((region) => (
