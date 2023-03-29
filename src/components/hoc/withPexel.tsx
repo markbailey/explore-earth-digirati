@@ -2,7 +2,6 @@ import { FC, useCallback, useEffect, useState } from 'react';
 import { createClient, ErrorResponse, Photo, PhotosWithTotalResults } from 'pexels';
 
 const { VITE_PEXEL_API_KEY } = import.meta.env;
-console.log(VITE_PEXEL_API_KEY);
 const client = createClient(VITE_PEXEL_API_KEY);
 
 function withPexel<P>(Component: FC<P>) {
