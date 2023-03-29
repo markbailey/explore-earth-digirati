@@ -2,7 +2,8 @@ import { FC, useCallback, useEffect, useState } from 'react';
 import { createClient, ErrorResponse, Photo, PhotosWithTotalResults } from 'pexels';
 
 const { VITE_PEXEL_API_KEY } = import.meta.env;
-const client = createClient(VITE_PEXEL_API_KEY!);
+console.log(VITE_PEXEL_API_KEY);
+const client = createClient(VITE_PEXEL_API_KEY);
 
 function withPexel<P>(Component: FC<P>) {
   return function PexelPhoto(props: PexelPhotoProps<P>) {
@@ -35,7 +36,7 @@ function withPexel<P>(Component: FC<P>) {
     useEffect(() => {
       if (query !== undefined)
         client.photos.search({ query }).then((response) => {
-          if (typeof (response as ErrorResponse).error === 'string') setPhoto(null);
+          if (typeof (response as ErrorResponse).error === 'string') return setPhoto(null);
           setPhoto((response as PhotosWithTotalResults).photos[0] ?? null);
         });
     }, [query, setPhoto]);
@@ -43,7 +44,7 @@ function withPexel<P>(Component: FC<P>) {
     useEffect(() => {
       if (photoId !== undefined)
         client.photos.show({ id: photoId }).then((response) => {
-          if (typeof (response as ErrorResponse).error === 'string') setPhoto(null);
+          if (typeof (response as ErrorResponse).error === 'string') return setPhoto(null);
           setPhoto(response as Photo);
         });
     }, [photoId, setPhoto]);
