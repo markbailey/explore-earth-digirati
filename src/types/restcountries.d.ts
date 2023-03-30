@@ -42,4 +42,5 @@ declare interface RestCountry {
   translations: Translations;
   flags: Flags;
   cca2: string;
+  latlng: [number, number];
 }

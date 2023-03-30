@@ -1,5 +1,5 @@
 export const API_URL = 'https://restcountries.com/v3.1/';
-const query = `?fields=name,region,subregion,population,capital,currencies,flags,languages,translations,cca2`;
+const query = `?fields=name,region,subregion,population,capital,currencies,flags,languages,translations,cca2,latlng`;
 
 const sortCountries = (countries: RestCountry[]) =>
   countries.sort((a, b) => a.name.common.localeCompare(b.name.common));
