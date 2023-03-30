@@ -17,6 +17,7 @@ function withLazyImage<P extends ImageElementProps>(Component: FC<P>) {
       const intersectionObserver = new IntersectionObserver((entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
+            node.src = '/assets/placeholder.jpg';
             preloadImage(node.dataset.src as string);
             intersectionObserver.unobserve(node);
           }

@@ -53,7 +53,12 @@ function Hero(props: HeroProps) {
       </div>
 
       <div className={styles.filters}>
-        <Select value={region ?? ''} onChange={onRegionChange}>
+        <Select
+          placeholder="Select a region"
+          value={region ?? ''}
+          onChange={onRegionChange}
+          aria-label="Select a region"
+        >
           {regions.names.map((region) => (
             <option key={region} value={region}>
               {titleCase(region)}
@@ -62,9 +67,11 @@ function Hero(props: HeroProps) {
         </Select>
 
         <Select
+          placeholder="Select a country"
           value={country?.name.common ?? ''}
           onChange={onCountryChange}
           disabled={countries.length === 0}
+          aria-label="Select a country"
         >
           {countries.map(({ name }) => (
             <option key={name.common} value={name.common}>
@@ -73,8 +80,16 @@ function Hero(props: HeroProps) {
           ))}
         </Select>
 
-        <Search value={searchCriteria} onChange={onSearchChange} disabled={disableSearch} />
-        <Button onClick={onResetClick}>Clear</Button>
+        <Search
+          value={searchCriteria}
+          onChange={onSearchChange}
+          disabled={disableSearch}
+          aria-label="Filter results"
+        />
+
+        <Button onClick={onResetClick} aria-label="Clear the filters">
+          Clear
+        </Button>
       </div>
     </div>
   );

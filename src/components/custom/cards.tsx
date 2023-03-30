@@ -13,8 +13,6 @@ export interface CountryCardProps extends RestCountry {
   onButtonClick(countryName: string): void;
 }
 
-// CardMedia with Pexel API
-// export const LazyMedia = withPexel(CardMedia);
 // CardMedia with Static Map Image
 export const StaticMapMedia = withStaticMap(CardMedia);
 
@@ -30,7 +28,9 @@ export function RegionCard(props: RegionCardProps) {
         <h2>{titleCase(name)}</h2>
         <p>{description}</p>
       </CardBody>
-      <Button onClick={onViewButtonClick}>View Region</Button>
+      <Button onClick={onViewButtonClick} aria-label={`View ${titleCase(name)}`}>
+        View Region
+      </Button>
     </Card>
   );
 }
@@ -46,7 +46,9 @@ export function CountryCard(props: CountryCardProps) {
         <h2>{name.common}</h2>
         <span>{name.official}</span>
       </CardBody>
-      <Button onClick={onViewButtonClick}>View Country</Button>
+      <Button onClick={onViewButtonClick} aria-label={`View ${name.common}`}>
+        View Country
+      </Button>
     </Card>
   );
 }
