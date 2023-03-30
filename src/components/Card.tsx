@@ -1,26 +1,22 @@
 import classNames from 'classnames';
 import { HTMLAttributes } from 'react';
 
-import { BackgroundImg } from './Img';
+import { BackgroundImg, MinImageProps } from './Img';
 import styles from '../assets/stylesheets/card.module.scss';
 
 export type CardProps = HTMLAttributes<HTMLElement> & { backgroundImg?: string };
 export type CardBodyProps = HTMLAttributes<HTMLDivElement> & { scrollable?: boolean };
-export interface CardMediaProps extends HTMLAttributes<HTMLDivElement> {
-  src: string;
-  alt: string;
-  srcSet?: string[];
-}
+export type CardMediaProps = HTMLAttributes<HTMLDivElement> & MinImageProps;
 
 export const cardStyles = styles;
 
 export function CardMedia(props: CardMediaProps) {
-  const { className: classNameProp, src, srcSet = [], alt, ...otherProps } = props;
+  const { className: classNameProp, src, alt, ...otherProps } = props;
   const className = classNames(styles.media, classNameProp);
 
   return (
     <div {...otherProps} className={className}>
-      <BackgroundImg src={src} srcSet={srcSet.join(';')} alt={alt} title={alt} />
+      <BackgroundImg src={src} alt={alt} title={alt} />
     </div>
   );
 }
