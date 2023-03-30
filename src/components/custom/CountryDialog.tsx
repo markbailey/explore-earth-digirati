@@ -159,7 +159,7 @@ export function CountryDialog(props: CountryDialogProps) {
                   href={googleMapUrl}
                   target="_blank"
                   rel="noreferrer"
-                  aria-lable="Open google maps in a new tab"
+                  aria-label="Open google maps in a new tab"
                 >
                   Show Google Map
                 </a>
