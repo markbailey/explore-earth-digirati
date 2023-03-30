@@ -7,13 +7,5 @@
     "asia": "Asia is Earth's largest and most populous continent, located primarily in the eastern and northern hemispheres. It shares the continental landmass of Eurasia with the continent of Europe and the continental landmass of Afro-Eurasia with both Europe and Africa.",
     "europe": "Europe is a continent located entirely in the Northern Hemisphere and mostly in the Eastern Hemisphere. It comprises the westernmost part of Eurasia and is bordered by the Arctic Ocean to the north, the Atlantic Ocean to the west, and the Mediterranean Sea to the south.",
     "oceania": "Oceania, also known as Oceanica, is a region centred on the islands of the tropical Pacific Ocean. The term is sometimes used more specifically to denote a continent comprising Australia, New Zealand, New Guinea, the Solomon Islands, Vanuatu and neighbouring islands in the Pacific Ocean."
-  },
-  "imageIds": {
-    "africa": 59873,
-    "americas": 14213371,
-    "antarctic": 868990,
-    "asia": 1531660,
-    "europe": 414094,
-    "oceania": 10513227
   }
 }

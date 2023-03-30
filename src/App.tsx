@@ -35,21 +35,15 @@ function App() {
   };
 
   const renderRegionCards = () =>
-    filteredRegions.map((name) => {
-      const description = regions.descriptions[name];
-      const photoId = regions.imageIds[name];
-
-      return (
-        <div key={name}>
-          <RegionCard
-            name={name}
-            description={description}
-            photoId={photoId}
-            onButtonClick={onRegionChange}
-          />
-        </div>
-      );
-    });
+    filteredRegions.map((name) => (
+      <div key={name}>
+        <RegionCard
+          name={name}
+          description={regions.descriptions[name]}
+          onButtonClick={onRegionChange}
+        />
+      </div>
+    ));
 
   const renderCountryCards = () =>
     filteredCountries.map((country) => (
