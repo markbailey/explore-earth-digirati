@@ -36,6 +36,7 @@ dialog.country {
 
   select {
     flex: 0;
+    margin-bottom: var(--spacing-3);
   }
 
   @media (max-width: #{$xs-max}) {
