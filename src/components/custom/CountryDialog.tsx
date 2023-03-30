@@ -57,11 +57,13 @@ export function CountryDialog(props: CountryDialogProps) {
 
     const capitalCity = capital.length > 0 ? capital[0] : null;
     const formatPopulation = population.toLocaleString();
-    const currencyKey = Object.keys(currencies)[0];
-    const currency = { ...currencies[currencyKey], abbr: currencyKey };
-    const formatedCurrency = currency?.name && `${currency.name} (${currency.abbr})`;
-    const googleMapUrl = `https://www.google.com/maps/@${latlng[0]},${latlng[1]},7.75z`;
 
+    const currencyKeys = Object.keys(currencies);
+    const currency: Currency | null =
+      currencyKeys.length > 0 ? (currencies as Currencies)[currencyKeys[0]] : null;
+    const formatedCurrency = currency?.name && `${currency.name} (${currencyKeys[0]})`;
+
+    const googleMapUrl = `https://www.google.com/maps/@${latlng[0]},${latlng[1]},7.75z`;
     const jpnOption = translations['jpn'] !== undefined ? [{ value: 'jpn', text: 'Japanese' }] : [];
     const translationOptions = Object.keys(languages)
       .map((key) => ({ value: key, text: `${languages[key]}(Native)` }))
@@ -153,14 +155,21 @@ export function CountryDialog(props: CountryDialogProps) {
               hasMap,
               <Fragment>
                 <br />
-                <a href={googleMapUrl} target="_blank" rel="noreferrer">
+                <a
+                  href={googleMapUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Open google maps in a new tab"
+                >
                   Show Google Map
                 </a>
               </Fragment>
             )}
           </CardBody>
 
-          <Button value="default">Close</Button>
+          <Button value="default" aria-label="Close dialog">
+            Close
+          </Button>
         </Card>
       </form>
     </Dialog>
