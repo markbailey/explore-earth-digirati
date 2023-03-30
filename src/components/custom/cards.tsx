@@ -1,12 +1,11 @@
 import { titleCase } from '../../utilities/string';
-import withPexel from '../hoc/withPexel';
 import Button from '../Button';
 import Card, { CardBody, CardMedia } from '../Card';
+import withStaticMap from '../hoc/withStaticMap';
 
 export interface RegionCardProps {
   name: RegionKey;
   description: string;
-  photoId: number;
   onButtonClick(regionName: RegionKey): void;
 }
 
@@ -15,16 +14,18 @@ export interface CountryCardProps extends RestCountry {
 }
 
 // CardMedia with Pexel API
-export const LazyMedia = withPexel(CardMedia);
+// export const LazyMedia = withPexel(CardMedia);
+// CardMedia with Static Map Image
+export const StaticMapMedia = withStaticMap(CardMedia);
 
 // Custom Card Components
 export function RegionCard(props: RegionCardProps) {
-  const { name, description, photoId, onButtonClick, ...otherProps } = props;
+  const { name, description, onButtonClick, ...otherProps } = props;
   const onViewButtonClick = () => onButtonClick(name);
 
   return (
     <Card {...otherProps}>
-      <LazyMedia photoId={photoId} size="medium" />
+      <CardMedia src={`/assets/${name}.jpg`} alt={titleCase(name)} />
       <CardBody>
         <h2>{titleCase(name)}</h2>
         <p>{description}</p>
@@ -35,18 +36,12 @@ export function RegionCard(props: RegionCardProps) {
 }
 
 export function CountryCard(props: CountryCardProps) {
-  const { name, flags, population, region, capital, onButtonClick, ...otherProps } = props;
+  const { name, flags, population, region, capital, latlng, onButtonClick, ...otherProps } = props;
   const onViewButtonClick = () => onButtonClick(name.common);
 
   return (
     <Card {...otherProps} backgroundImg={flags.png}>
-      <LazyMedia
-        query={name.common}
-        size="medium"
-        fallbackSrc={flags.svg}
-        fallbackAlt={flags.alt}
-      />
-
+      <StaticMapMedia latitudeLongitude={latlng} mapSize={[500, 300]} zoom={7} />
       <CardBody>
         <h2>{name.common}</h2>
         <span>{name.official}</span>

@@ -1,20 +1,27 @@
-import { HTMLProps } from 'react';
+import { ForwardedRef, forwardRef, HTMLAttributes } from 'react';
 import classNames from 'classnames';
 import styles from '../assets/stylesheets/image.module.scss';
+import withLazyImage from './hoc/withLazyImage';
 
-export type BackgroundImageProps = Omit<ImageProps, 'background'>;
-export interface ImageProps extends HTMLProps<HTMLImageElement> {
-  alt: string;
-  background?: boolean;
-}
+export type MinImageProps = { src: string; alt: string };
+export type ImageElementProps = HTMLAttributes<HTMLImageElement> & MinImageProps;
+export type BackgroundImgProps = Omit<ImageElementProps, 'background'>;
+export type ImageProps = ImageElementProps & { background?: boolean };
 
 export const imgStyles = styles;
 
-function Img(props: ImageProps) {
+const BaseImg = forwardRef((props: ImageProps, ref: ForwardedRef<HTMLImageElement>) => {
   const { className: classNameProp, background = false, ...otherProps } = props;
   const className = classNames(styles.image, background && styles.background, classNameProp);
-  return <img {...otherProps} className={className} loading="lazy" />;
-}
+  return <img {...otherProps} ref={ref} className={className} loading="lazy" />;
+});
 
-export const BackgroundImg = (props: BackgroundImageProps) => <Img {...props} background />;
+const BaseBackgroundImg = forwardRef(
+  (props: BackgroundImgProps, ref: ForwardedRef<HTMLImageElement>) => (
+    <BaseImg {...props} ref={ref} background />
+  )
+);
+
+export const BackgroundImg = withLazyImage<BackgroundImgProps>(BaseBackgroundImg);
+const Img = withLazyImage<ImageProps>(BaseImg);
 export default Img;
