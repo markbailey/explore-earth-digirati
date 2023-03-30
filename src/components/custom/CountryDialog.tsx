@@ -155,14 +155,21 @@ export function CountryDialog(props: CountryDialogProps) {
               hasMap,
               <Fragment>
                 <br />
-                <a href={googleMapUrl} target="_blank" rel="noreferrer">
+                <a
+                  href={googleMapUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-lable="Open google maps in a new tab"
+                >
                   Show Google Map
                 </a>
               </Fragment>
             )}
           </CardBody>
 
-          <Button value="default">Close</Button>
+          <Button value="default" aria-label="Close dialog">
+            Close
+          </Button>
         </Card>
       </form>
     </Dialog>
