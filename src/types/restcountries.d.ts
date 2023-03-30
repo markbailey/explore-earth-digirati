@@ -1,32 +1,34 @@
-interface NameObject {
+declare interface NameObject {
   common: string;
   official: string;
 }
 
-interface Name extends NameObject {
+declare interface Name extends NameObject {
   nativeName: {
     [key: string]: NameObject;
   };
 }
 
-interface Flags {
+declare interface Flags {
   png: string;
   svg: string;
   alt: string;
 }
 
-interface Currencies {
-  [key: string]: {
-    name: string;
-    symbol: string;
-  };
+declare interface Currency {
+  name: string;
+  symbol: string;
 }
 
-interface Languages {
+declare interface Currencies {
+  [key: string]: declare;
+}
+
+declare interface Languages {
   [key: string]: string;
 }
 
-interface Translations {
+declare interface Translations {
   [key: string]: NameObject;
 }
 
@@ -37,7 +39,7 @@ declare interface RestCountry {
   subregion: string;
   population: number;
   capital: string[];
-  currencies: Currencies;
+  currencies: Currencies | {};
   languages: Languages;
   translations: Translations;
   flags: Flags;

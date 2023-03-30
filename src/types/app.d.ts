@@ -1,3 +1,4 @@
+declare type EmptyObject = {};
 declare type RegionKey = 'africa' | 'americas' | 'antarctic' | 'asia' | 'europe' | 'oceania';
 type AppPayload = RegionKey | RestCountry | RestCountry[] | boolean | string | null;
 type AppActionType =
