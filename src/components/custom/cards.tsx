@@ -41,7 +41,7 @@ export function CountryCard(props: CountryCardProps) {
 
   return (
     <Card {...otherProps} backgroundImg={flags.png}>
-      <StaticMapMedia latitudeLongitude={latlng} mapSize={[500, 300]} zoom={7} />
+      <StaticMapMedia latitudeLongitude={latlng} mapSize={[500, 300]} zoom={5} />
       <CardBody>
         <h2>{name.common}</h2>
         <span>{name.official}</span>
