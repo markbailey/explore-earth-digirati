@@ -60,7 +60,7 @@ export function CountryDialog(props: CountryDialogProps) {
     const currencyKey = Object.keys(currencies)[0];
     const currency = { ...currencies[currencyKey], abbr: currencyKey };
     const formatedCurrency = `${currency.name} (${currency.abbr})`;
-    const googleMapUrl = `https://www.google.com/maps/@${latlng[0]},${latlng[1]},5z`;
+    const googleMapUrl = `https://www.google.com/maps/@${latlng[0]},${latlng[1]},7.75z`;
 
     const jpnOption = translations['jpn'] !== undefined ? [{ value: 'jpn', text: 'Japanese' }] : [];
     const translationOptions = Object.keys(languages)
