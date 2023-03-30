@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 
 import { mount } from '../../utilities/show';
 import { titleCase } from '../../utilities/string';
@@ -28,11 +28,14 @@ export function CountryDialog(props: CountryDialogProps) {
     population,
     flag,
     translations,
+    googleMapUrl,
     hasRegion,
     hasCaptial,
     hasCurrency,
+    hasMap,
   } = useMemo(() => {
-    if (country === null) return { hasRegion: false, hasCaptial: false, hasCurrency: false };
+    if (country === null)
+      return { hasRegion: false, hasCaptial: false, hasCurrency: false, hasMap: false };
     console.time('CountryDialog:Data');
     const {
       name,
@@ -44,6 +47,7 @@ export function CountryDialog(props: CountryDialogProps) {
       currencies,
       languages,
       translations,
+      latlng,
     } = country;
 
     const translatedName =
@@ -56,6 +60,7 @@ export function CountryDialog(props: CountryDialogProps) {
     const currencyKey = Object.keys(currencies)[0];
     const currency = { ...currencies[currencyKey], abbr: currencyKey };
     const formatedCurrency = `${currency.name} (${currency.abbr})`;
+    const googleMapUrl = `https://www.google.com/maps/@${latlng[0]},${latlng[1]},5z`;
 
     const jpnOption = translations['jpn'] !== undefined ? [{ value: 'jpn', text: 'Japanese' }] : [];
     const translationOptions = Object.keys(languages)
@@ -72,10 +77,12 @@ export function CountryDialog(props: CountryDialogProps) {
       population: formatPopulation,
       flag: flags,
       translations: translationOptions,
+      googleMapUrl,
 
       hasRegion: true,
       hasCaptial: capitalCity !== null,
       hasCurrency: true,
+      hasMap: true,
     };
   }, [country, translation]);
 
@@ -141,6 +148,16 @@ export function CountryDialog(props: CountryDialogProps) {
                 )}
               </tbody>
             </table>
+
+            {mount(
+              hasMap,
+              <Fragment>
+                <br />
+                <a href={googleMapUrl} target="_blank" rel="noreferrer">
+                  Show Google Map
+                </a>
+              </Fragment>
+            )}
           </CardBody>
 
           <Button value="default">Close</Button>
